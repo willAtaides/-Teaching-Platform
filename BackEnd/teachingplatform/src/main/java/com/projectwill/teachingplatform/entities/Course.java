@@ -2,6 +2,9 @@ package com.projectwill.teachingplatform.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="tb_course")
 public class Course {
@@ -13,6 +16,8 @@ public class Course {
     private String imgUri;
     private String imgGrayUri;
 
+    @OneToMany(mappedBy = "course")
+    private List<Offer> offers = new ArrayList<>();
     public Course(){
 
     }
@@ -54,6 +59,10 @@ public class Course {
 
     public void setImgGrayUri(String imgGrayUri) {
         this.imgGrayUri = imgGrayUri;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
     }
 
     @Override
