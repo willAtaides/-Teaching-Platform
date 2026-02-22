@@ -1,17 +1,11 @@
 package com.projectwill.teachingplatform.entities;
 
-import com.projectwill.teachingplatform.enums.ResourceType;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name = "tb_resource")
-public class Resource {
-
+@Table(name = "tb_section")
+public class Section {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,28 +13,27 @@ public class Resource {
     private String description;
     private Integer position;
     private String imgUri;
-    private ResourceType type;
 
     @ManyToOne
-    @JoinColumn(name = "offer_id")
-    private Offer offer;
+    @JoinColumn(name = "resource_id")
+    private Resource resource;
 
-    @OneToMany(mappedBy = "resource")
-    private List<Section> sections = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "prerequisite_id")
+    private Section prerequisite;
 
-
-    public Resource(){
+    public Section(){
 
     }
 
-    public Resource(Long id, String title, String description, Integer position, String imgUri, ResourceType type, Offer offer) {
+    public Section(Long id, String title, String description, Integer position, String imgUri, Resource resource, Section prerequisite) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.position = position;
         this.imgUri = imgUri;
-        this.type = type;
-        this.offer = offer;
+        this.resource = resource;
+        this.prerequisite = prerequisite;
     }
 
     public Long getId() {
@@ -83,33 +76,28 @@ public class Resource {
         this.imgUri = imgUri;
     }
 
-    public ResourceType getType() {
-        return type;
+    public Resource getResource() {
+        return resource;
     }
 
-    public void setType(ResourceType type) {
-        this.type = type;
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
-
-    public Offer getOffer() {
-        return offer;
+    public Section getPrerequisite() {
+        return prerequisite;
     }
 
-    public void setOffer(Offer offer) {
-        this.offer = offer;
-    }
-
-    public List<Section> getSections() {
-        return sections;
+    public void setPrerequisite(Section prerequisite) {
+        this.prerequisite = prerequisite;
     }
 
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Resource resource)) return false;
+        if (!(o instanceof Section section)) return false;
 
-        return id.equals(resource.id);
+        return id.equals(section.id);
     }
 
     @Override
