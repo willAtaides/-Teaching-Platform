@@ -25,12 +25,19 @@ public class Topic {
     private Lesson lesson;
 
     @ManyToOne
+    @JoinColumn(name = "reply_id")
+    private Reply answer;
+
+    @ManyToOne
     @JoinColumn(name = "offer_id")
     private Offer offer;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
+
+    @OneToMany(mappedBy = "topic")
+    private List<Reply> replies = new ArrayList<>();
 
 
     @ManyToMany
