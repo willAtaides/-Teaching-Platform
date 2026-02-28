@@ -16,6 +16,7 @@ public class Deliver {
     private Instant moment;
     private DeliverStatus status;
     private String feedback;
+    private Integer correctCount;
 
 
     @ManyToOne
