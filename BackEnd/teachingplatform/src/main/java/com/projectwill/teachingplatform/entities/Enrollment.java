@@ -87,6 +87,14 @@ public class Enrollment {
         this.onlyUpdate = onlyUpdate;
     }
 
+    public List<Deliver> getDeliveries() {
+        return deliveries;
+    }
+
+    public Set<Lesson> getLessonsDone() {
+        return lessonsDone;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
